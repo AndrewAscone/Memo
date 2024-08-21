@@ -5,6 +5,20 @@ import './styles/main.css'
 const App = () =>{
 
     const [modalVisible,setModalVisible]=useState(false);
+    const [title,setTitle] = useState('');
+    const [content,setContent] = useState('');
+
+    const createNote = (event) =>{
+        event.preventDefault();    
+
+        console.log(title)
+        console.log(content)
+
+        setTitle('')
+        setContent('')
+
+        setModalVisible(false)
+    }
     return(
         <div>
             <div className="header">
@@ -35,14 +49,20 @@ const App = () =>{
                     <form action="">
                         <div className="form-group">
                             <label htmlFor="title">Title</label>
-                            <input type="text" name="title" id="title" className="form-control" />
+                            <input type="text" name="title" id="title" 
+                                value={title}
+                                onChange={(e)=>setTitle(e.target.value)}
+                            className="form-control" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="content">Text</label>
-                            <textarea name="content" id="" cols="30" rows="5" className="form-control"></textarea>
+                            <textarea name="content" id="" cols="30" rows="5" 
+                                value={content}
+                                onChange={(e)=>setContent(e.target.value)}
+                            className="form-control"></textarea>
                         </div>
                         <div className="form-group">
-                            <input type="submit" value="Save" className='btn'/>
+                            <input type="submit" value="Save" className='btn' onClick={createNote}/>
                         </div>
                     </form>
                 </div>
