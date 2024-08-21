@@ -54,6 +54,16 @@ body{
     background-color: rgba(0, 0, 0, 0.301);
 }
 
+.modal-not-visible{
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.301);
+    display: none;
+}
+
 .form{
     background-color: white;
     width: 50%;
@@ -91,4 +101,11 @@ label{
 .form-control{
     width: 100%;
     padding: 15px;
+}
+.btn{
+    padding: 20px;
+    background-color: rgb(21, 95, 37);
+    color: white;
+    cursor: pointer;
+    border: none;
 }
