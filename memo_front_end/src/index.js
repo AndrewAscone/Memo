@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import './styles/main.css'
+import { Note } from './components/note'
 
 const backendURL = 'http://localhost:8000/'
 
@@ -9,6 +10,7 @@ const App = () =>{
     const [modalVisible,setModalVisible]=useState(false);
     const [title,setTitle] = useState('');
     const [content,setContent] = useState('');
+    const [posts,setPosts]=useState([]);
 
     const createNote = (event) =>{
         event.preventDefault();    
@@ -29,6 +31,7 @@ const App = () =>{
 
         if(response.ok){
             console.log(data)
+            setPosts(data)
         }
         else{
             console.log("Network request has encountered an error")
@@ -40,6 +43,10 @@ const App = () =>{
             getAllPosts()
         },[]
     )
+
+    const deleteItem=(noteId)=>{
+        console.log(noteId)
+    }
 
     return(
         <div>
@@ -54,7 +61,18 @@ const App = () =>{
                 </div>
             </div>
             <div className="memos">
-                <p className="centerText">No Memos</p>
+                {/*<p className="centerText">No Memos</p>*/}
+                {
+                    posts.map(
+                        (item)=>(
+                            <Note title={item.title} 
+                            content={item.content}
+                            onclick={deleteItem(item.id)}
+                            key={item.id}
+                            />
+                        )
+                    )
+                }
             </div>
             <div className={modalVisible? 'modal' : 'modal-not-visible'}>
                 <div className="form">
