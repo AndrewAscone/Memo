@@ -110,6 +110,17 @@ label{
     border: none;
 }
 
+.note{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+.note:hover{
+    transform: scale(1.1);
+}
+
 @media (max-width:700px){
     .form{
         width: 80%;
