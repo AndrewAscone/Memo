@@ -108,12 +108,19 @@ label{
     width: 100%;
     padding: 15px;
 }
+
 .btn{
     padding: 20px;
     background-color: rgb(21, 95, 37);
     color: white;
     cursor: pointer;
     border: none;
+    font-size: 20px;
+    transition: all 0.5s;
+}
+
+.btn:hover{
+    background-color: rgb(13, 56, 22);
 }
 
 .post-list{
@@ -150,7 +157,8 @@ label{
 
 .close{
     text-decoration: none;
-    color: rgb(21, 95, 37)
+    color: rgb(21, 95, 37);
+    padding-left: 15px;
 }
 
 @media (max-width:700px){
