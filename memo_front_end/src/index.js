@@ -60,20 +60,27 @@ const App = () =>{
                     >Write a Memo</a>
                 </div>
             </div>
-            <div className="memos">
-                {/*<p className="centerText">No Memos</p>*/}
-                {
-                    posts.map(
-                        (item)=>(
-                            <Note title={item.title} 
-                            content={item.content}
-                            onclick={deleteItem(item.id)}
-                            key={item.id}
-                            />
+            {posts.length > 0 ? 
+                (<div className="post-list">
+                    {
+                        posts.map(
+                            (item)=>(
+                                <Note title={item.title} 
+                                content={item.content}
+                                onclick={()=>deleteItem(item.id)}
+                                key={item.id}
+                                />
+                            )
                         )
-                    )
-                }
-            </div>
+                    }
+                </div>)
+                :(
+                    <div className="memos">
+                        <p className="centerText">No Memos</p>
+                    
+                    </div> 
+                )
+            }
             <div className={modalVisible? 'modal' : 'modal-not-visible'}>
                 <div className="form">
                     <div className="form-header">
