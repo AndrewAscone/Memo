@@ -12,16 +12,37 @@ const App = () =>{
     const [content,setContent] = useState('');
     const [posts,setPosts]=useState([]);
 
-    const createNote = (event) =>{
-        event.preventDefault();    
+    const createNote = async (event) =>{
+        event.preventDefault();
 
-        console.log(title)
-        console.log(content)
+        const postRequest= new Request(
+            `${backendURL}/posts/`,
+            {
+                body:JSON.stringify({title, content}),
+                headers:{
+                    'Content-Type':'Application/Json'
+                },
+                method:'POST'
+            }
+        );
+
+        const response = await fetch(postRequest);
+
+        const data = await response.json();
+
+        if(response.ok){
+            console.log(data)
+        }
+        else{
+            console.log("Network request has encountered an error")
+        }
 
         setTitle('')
         setContent('')
 
         setModalVisible(false)
+
+        getAllPosts()
     }
 
     const getAllPosts = async () =>{
@@ -44,8 +65,18 @@ const App = () =>{
         },[]
     )
 
-    const deleteItem=(noteId)=>{
+    const deleteItem= async (noteId)=>{
         console.log(noteId)
+
+        const response = await fetch(`${backendURL}/posts/${noteId}/`,{
+            method:'DELETE'
+        })
+
+        if(response.ok){
+            console.log(response.status)
+        }
+
+        getAllPosts();
     }
 
     return(
@@ -99,14 +130,18 @@ const App = () =>{
                             <input type="text" name="title" id="title" 
                                 value={title}
                                 onChange={(e)=>setTitle(e.target.value)}
-                            className="form-control" />
+                                className="form-control" 
+                                required
+                            />
                         </div>
                         <div className="form-group">
                             <label htmlFor="content">Text</label>
                             <textarea name="content" id="" cols="30" rows="5" 
                                 value={content}
                                 onChange={(e)=>setContent(e.target.value)}
-                            className="form-control"></textarea>
+                                className="form-control"
+                                required
+                            ></textarea>
                         </div>
                         <div className="form-group">
                             <input type="submit" value="Save" className='btn' onClick={createNote}/>
