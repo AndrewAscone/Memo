@@ -26,7 +26,13 @@ body{
     border-radius: 10px;
     text-decoration: none;
     text-transform: uppercase;
-    color: rgb(21, 95, 37)
+    color: rgb(21, 95, 37);
+    transition: all 0.5s;
+}
+
+.add-btn:hover{
+    background-color: rgb(173, 173, 173);
+    color: rgb(23, 165, 54);
 }
 
 .add-section{
