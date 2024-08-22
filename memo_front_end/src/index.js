@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import './styles/main.css'
+
+const backendURL = 'http://localhost:8000/'
 
 const App = () =>{
 
@@ -19,6 +21,26 @@ const App = () =>{
 
         setModalVisible(false)
     }
+
+    const getAllPosts = async () =>{
+        const response = await fetch(`${backendURL}/posts/`);
+
+        const data = await response.json()
+
+        if(response.ok){
+            console.log(data)
+        }
+        else{
+            console.log("Network request has encountered an error")
+        }
+    }
+
+    useEffect(
+        () =>{
+            getAllPosts()
+        },[]
+    )
+
     return(
         <div>
             <div className="header">
